@@ -1,12 +1,16 @@
 #gameContainer {
-    width: 800px;
-    height: 500px;
+    position: relative;
+    width: 900px;
+    height: 600px;
     border: 1px solid black;
     margin: 0 auto;
 }
 
 #character {
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    top: 270px; 
+    left: 435px;
+    width: 30px;
+    height: 30px;
     background-color: red;
 }
