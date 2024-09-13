@@ -8,8 +8,8 @@
 
 #character {
     position: absolute;
-    top: 270px; 
-    left: 435px;
+    bottom: 270px; 
+    left: 420px;
     width: 30px;
     height: 30px;
     background-color: red;

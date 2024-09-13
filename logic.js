@@ -4,7 +4,8 @@ const upArrow = document.getElementById("upArrow");
 const downArrow = document.getElementById("downArrow");
 const rightArrow = document.getElementById("rightArrow");
 const leftArrow = document.getElementById("leftArrow");
-
+let currentY = extractNumbers(window.getComputedStyle(character).getPropertyValue("bottom"));
+let currentX = extractNumbers(window.getComputedStyle(character).getPropertyValue("left"));
 
 upArrow.addEventListener("click", moveUp);
 downArrow.addEventListener("click", moveDown);
@@ -23,17 +24,29 @@ function extractNumbers(string) {
 }
 
 function moveUp() {
-    characterStyle.top = `${extractNumbers(window.getComputedStyle(character).getPropertyValue("top")) - 30}px`;
+    if (currentY < 570) {
+        currentY += 30;
+        characterStyle.bottom = `${currentY}px`;
+    }
 }
 
 function moveDown() {
-    characterStyle.top = `${extractNumbers(window.getComputedStyle(character).getPropertyValue("top")) + 30}px`;
+    if (currentY > 0) {
+        currentY -= 30;
+        characterStyle.bottom = `${currentY}px`;
+    }
 }
 
 function moveRight() {
-    characterStyle.left = `${extractNumbers(window.getComputedStyle(character).getPropertyValue("left")) - 30}px`;
+    if (currentX > 0) {
+        currentX -= 30;
+        characterStyle.left = `${currentX}px`;
+    }
 }
 
 function moveLeft() {
-    characterStyle.left = `${extractNumbers(window.getComputedStyle(character).getPropertyValue("left")) + 30}px`;
+    if (currentX < 870) {
+        currentX += 30;
+        characterStyle.left = `${currentX}px`;
+    }
 }
