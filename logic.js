@@ -12,12 +12,12 @@ const leftArrow = document.getElementById("leftArrow");
 //This section is concerned with starting the game
 
 startButton.addEventListener("click", () => {
-    startButton.style.display = "none";
+    startButton.classList.add("hidden");
     player.style.display = "block";
-    upArrow.style.display = 
-    downArrow.style.display = 
-    rightArrow.style.display = 
-    leftArrow.style.display = "inline";
+    upArrow.classList.remove("hidden");
+    rightArrow.classList.remove("hidden");
+    downArrow.classList.remove("hidden");
+    leftArrow.classList.remove("hidden");
     player.style.left = addPx(playerX);
     player.style.bottom = addPx(playerY);
 }
