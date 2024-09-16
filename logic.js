@@ -11,12 +11,32 @@ const rightArrow = document.getElementById("rightArrow");
 const leftArrow = document.getElementById("leftArrow");
 const obstacle = document.getElementById("obstacle");
 
+//This section is concerned with setting the parameters of the game content
+
+//obstacle
+const obstacleHeight = 300;
+const obstacleWidth = 150;
+const obstacleBoundBottom = 150;
+const obstacleBoundLeft = 375;
+const obstacleBoundTop = obstacleBoundBottom + obstacleHeight;
+const obstacleBoundRight = obstacleBoundLeft + obstacleWidth;
+
+//player
+const playerWidth = 30;
+const playerHeight = 30;
+let playerBoundBottom = 0;
+let playerBoundLeft = 0;
+let playerBoundTop = playerBoundBottom + playerHeight;
+let playerBoundRight = playerBoundLeft + playerWidth;
+let playerX = getCenter(playerWidth, playerBoundLeft);
+let playerY = getCenter(playerHeight, playerBoundRight);
+let stepLength = 15;
+
 //This section is concerned with starting the game
 
 startButton.addEventListener("click", () => {
 
     //buttons
-
     startButton.classList.add("hidden");
     upArrow.classList.remove("hidden");
     rightArrow.classList.remove("hidden");
@@ -24,28 +44,22 @@ startButton.addEventListener("click", () => {
     leftArrow.classList.remove("hidden");
     
     //player
-
     player.style.display = "block";
-    player.style.left = addPx(playerX);
-    player.style.bottom = addPx(playerY);
+    player.style.width = addPx(playerWidth);
+    player.style.height = addPx(playerHeight);
+    player.style.left = addPx(playerBoundLeft);
+    player.style.bottom = addPx(playerBoundBottom);
 
     //obstacle
-
-    obstacle.style.width = addPx(150);
-    obstacle.style.height = addPx(300);
+    obstacle.style.width = addPx(obstacleWidth);
+    obstacle.style.height = addPx(obstacleHeight);
     obstacle.classList.remove("hidden");
-    obstacle.style.left = addPx(450 - 75);
-    obstacle.style.bottom = addPx(300 - 150);
+    obstacle.style.left = addPx(obstacleBoundLeft);
+    obstacle.style.bottom = addPx(obstacleBoundBottom);
 }
 );
 
 //This section is concerned with the movement of the player
-
-const playerWidth = player.style.width;
-const playerHeight = player.style.height;
-let playerX = player.style.left = getCenter(playerWidth, 0);
-let playerY = player.style.bottom = getCenter(playerHeight, 0);
-let stepLength = 15;
 
 function addPx(num) {
     return `${num}px`;
@@ -60,30 +74,57 @@ downArrow.addEventListener("click", moveDown);
 leftArrow.addEventListener("click", moveLeft);
 rightArrow.addEventListener("click", moveRight);
 
+function checkObstruction(direction) {
+    return (direction === "top" &&
+    playerBoundTop >= obstacleBoundBottom &&
+    playerBoundRight > obstacleBoundLeft &&
+    playerBoundLeft < obstacleBoundRight ||
+    direction === "right" &&
+    playerBoundRight >= obstacleBoundLeft &&
+    playerBoundTop > obstacleBoundBottom &&
+    playerBoundBottom < obstacleBoundTop ||
+    direction === "bottom" &&
+    playerBoundBottom <= obstacleBoundTop &&
+    playerBoundRight > obstacleBoundLeft &&
+    playerBoundLeft < obstacleBoundRight ||
+    direction === "left" &&
+    playerBoundLeft <= obstacleBoundRight &&
+    playerBoundTop > obstacleBoundBottom &&
+    playerBoundBottom < obstacleBoundTop)
+}
+
 function moveUp() {
-    if (playerY < 570) {
+    if (playerY < 570 && !checkObstruction("top")) {
         playerY += stepLength;
-        player.style.bottom = addPx(playerY);
+        playerBoundTop += stepLength;
+        playerBoundBottom += stepLength;
+        player.style.bottom = addPx(playerBoundBottom);
     }
 }
 
 function moveDown() {
-    if (playerY > 0) {
+    if (playerY > 0 && !checkObstruction("bottom")) {
         playerY -= stepLength;
-        player.style.bottom = addPx(playerY);
+        playerBoundTop -= stepLength;
+        playerBoundBottom -= stepLength;
+        player.style.bottom = addPx(playerBoundBottom);
     }
 }
 
 function moveRight() {
-    if (playerX > 0) {
-        playerX -= stepLength;
-        player.style.left = addPx(playerX);
+    if (playerX > 0 && !checkObstruction("right")) {
+        playerX += stepLength;
+        playerBoundRight += stepLength;
+        playerBoundLeft += stepLength;
+        player.style.left = addPx(playerBoundLeft);
     }
 }
 
 function moveLeft() {
-    if (playerX < 870) {
-        playerX += stepLength;
-        player.style.left = addPx(playerX);
+    if (playerX < 870 && !checkObstruction("left")) {
+        playerX -= stepLength;
+        playerBoundRight -= stepLength;
+        playerBoundLeft -= stepLength;
+        player.style.left = addPx(playerBoundLeft);
     }
 }
