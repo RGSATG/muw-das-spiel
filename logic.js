@@ -1,3 +1,4 @@
+"use strict";
 //This section is concerned with adding HTML elements
 const character = document.getElementById("character");
 const startButton = document.getElementById("startButton");
