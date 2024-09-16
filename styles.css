@@ -6,7 +6,7 @@
     margin: 0 auto;
 }
 
-#character {
+#player {
     display: none;
     position: absolute;
     width: 30px;
