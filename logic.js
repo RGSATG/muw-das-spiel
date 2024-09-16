@@ -1,22 +1,30 @@
 "use strict";
+
 //This section is concerned with adding HTML elements
+
 const player = document.getElementById("player");
 const startButton = document.getElementById("startButton");
-
-//This section is concerned with starting the game
-startButton.addEventListener("click", () => {
-    player.style.display = "block";
-    player.style.left = addPx(playerX);
-    player.style.bottom = addPx(playerY);
-    startButton.style.display = "none";
-}
-);
-
-//This section is concerned with the movement of the player
 const upArrow = document.getElementById("upArrow");
 const downArrow = document.getElementById("downArrow");
 const rightArrow = document.getElementById("rightArrow");
 const leftArrow = document.getElementById("leftArrow");
+
+//This section is concerned with starting the game
+
+startButton.addEventListener("click", () => {
+    startButton.style.display = "none";
+    player.style.display = "block";
+    upArrow.style.display = 
+    downArrow.style.display = 
+    rightArrow.style.display = 
+    leftArrow.style.display = "inline";
+    player.style.left = addPx(playerX);
+    player.style.bottom = addPx(playerY);
+}
+);
+
+//This section is concerned with the movement of the player
+
 const playerWidth = player.style.width;
 const playerHeight = player.style.height;
 let playerX = player.style.left = getCenter(playerWidth, 0);
