@@ -8,14 +8,21 @@
 
 #player {
     display: none;
-    position: absolute;
     width: 30px;
     height: 30px;
     background-color: red;
 }
 
+.gameContent {
+    position: absolute;
+}
+
 .hidden {
     display: none;
+}
+
+#obstacle {
+    background-color: black;
 }
 
 /* This section is concerned with the styling of buttons */

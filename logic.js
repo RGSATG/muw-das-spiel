@@ -2,24 +2,40 @@
 
 //This section is concerned with adding HTML elements
 
+const gameContainer = document.getElementById("gameContainer");
 const player = document.getElementById("player");
 const startButton = document.getElementById("startButton");
 const upArrow = document.getElementById("upArrow");
 const downArrow = document.getElementById("downArrow");
 const rightArrow = document.getElementById("rightArrow");
 const leftArrow = document.getElementById("leftArrow");
+const obstacle = document.getElementById("obstacle");
 
 //This section is concerned with starting the game
 
 startButton.addEventListener("click", () => {
+
+    //buttons
+
     startButton.classList.add("hidden");
-    player.style.display = "block";
     upArrow.classList.remove("hidden");
     rightArrow.classList.remove("hidden");
     downArrow.classList.remove("hidden");
     leftArrow.classList.remove("hidden");
+    
+    //player
+
+    player.style.display = "block";
     player.style.left = addPx(playerX);
     player.style.bottom = addPx(playerY);
+
+    //obstacle
+
+    obstacle.style.width = addPx(150);
+    obstacle.style.height = addPx(300);
+    obstacle.classList.remove("hidden");
+    obstacle.style.left = addPx(450 - 75);
+    obstacle.style.bottom = addPx(300 - 150);
 }
 );
 
@@ -29,7 +45,7 @@ const playerWidth = player.style.width;
 const playerHeight = player.style.height;
 let playerX = player.style.left = getCenter(playerWidth, 0);
 let playerY = player.style.bottom = getCenter(playerHeight, 0);
-let stepLength = 30;
+let stepLength = 15;
 
 function addPx(num) {
     return `${num}px`;
