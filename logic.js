@@ -78,19 +78,23 @@ function checkObstruction(direction) {
     return (direction === "top" &&
     playerBoundTop >= obstacleBoundBottom &&
     playerBoundRight > obstacleBoundLeft &&
-    playerBoundLeft < obstacleBoundRight ||
+    playerBoundLeft < obstacleBoundRight &&
+    playerBoundBottom < obstacleBoundTop ||
     direction === "right" &&
     playerBoundRight >= obstacleBoundLeft &&
     playerBoundTop > obstacleBoundBottom &&
-    playerBoundBottom < obstacleBoundTop ||
+    playerBoundBottom < obstacleBoundTop &&
+    playerBoundLeft < obstacleBoundRight ||
     direction === "bottom" &&
     playerBoundBottom <= obstacleBoundTop &&
     playerBoundRight > obstacleBoundLeft &&
-    playerBoundLeft < obstacleBoundRight ||
+    playerBoundLeft < obstacleBoundRight &&
+    playerBoundTop > obstacleBoundBottom ||
     direction === "left" &&
     playerBoundLeft <= obstacleBoundRight &&
     playerBoundTop > obstacleBoundBottom &&
-    playerBoundBottom < obstacleBoundTop)
+    playerBoundBottom < obstacleBoundTop &&
+    playerBoundRight > obstacleBoundLeft)
 }
 
 function moveUp() {
